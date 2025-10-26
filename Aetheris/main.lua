@@ -1,0 +1,73 @@
+local Config = {
+    Name = "EnergyAssault Cheat",
+    Version = "1.0",
+    Game = "Energy Assault"
+}
+
+print("🎮 " .. Config.Name .. " v" .. Config.Version)
+print("🎯 Target: " .. Config.Game)
+
+local Flux = loadfile("UI/FluxLib.lua")()
+
+local Aimbot = loadfile("Modules/Aimbot.lua")()
+local ESP = loadfile("Modules/ESP.lua")()
+local Misc = loadfile("Modules/Misc.lua")()
+
+local Window = Flux:Window("EnergyAssault Cheat", "Private Cheat", Color3.fromRGB(0, 255, 255), Enum.KeyCode.RightShift)
+
+local CombatTab = Window:Tab("Combat", "http://www.roblox.com/asset/?id=6023426915")
+CombatTab:Toggle("Aimbot", "Lock onto enemies", false, function(state)
+    Aimbot.SetEnabled(state)
+end)
+CombatTab:Slider("Aimbot FOV", "Field of view", 1, 360, 60, true, function(value)
+    Aimbot.SetFOV(value)
+end)
+CombatTab:Toggle("Silent Aim", "Shoot through walls", false, function(state)
+    Aimbot.SetSilentAim(state)
+end)
+CombatTab:Toggle("Trigger Bot", "Auto shoot when aiming", false, function(state)
+    Aimbot.SetTriggerBot(state)
+end)
+CombatTab:Dropdown("Target Part", "Where to aim", {"Head", "Torso", "Random"}, "Head", function(part)
+    Aimbot.SetTargetPart(part)
+end)
+
+local VisualsTab = Window:Tab("Visuals", "http://www.roblox.com/asset/?id=6023426915")
+VisualsTab:Toggle("ESP", "See players through walls", false, function(state)
+    ESP.SetEnabled(state)
+end)
+VisualsTab:Toggle("Box ESP", "Draw boxes around players", false, function(state)
+    ESP.SetBoxESP(state)
+end)
+VisualsTab:Toggle("Tracers", "Draw lines to players", false, function(state)
+    ESP.SetTracers(state)
+end)
+VisualsTab:Toggle("Name ESP", "Show player names", false, function(state)
+    ESP.SetNameESP(state)
+end)
+VisualsTab:Toggle("Distance ESP", "Show distance to players", false, function(state)
+    ESP.SetDistanceESP(state)
+end)
+VisualsTab:Colorpicker("ESP Color", "Color for ESP", Color3.fromRGB(0, 255, 0), function(color)
+    ESP.SetColor(color)
+end)
+
+local PlayerTab = Window:Tab("Player", "http://www.roblox.com/asset/?id=6023426915")
+PlayerTab:Toggle("Speed Hack", "Move faster", false, function(state)
+    Misc.SetSpeedHack(state)
+end)
+PlayerTab:Slider("Speed", "Movement speed", 16, 100, 25, true, function(value)
+    Misc.SetSpeed(value)
+end)
+PlayerTab:Toggle("Infinite Jump", "Jump forever", false, function(state)
+    Misc.SetInfiniteJump(state)
+end)
+PlayerTab:Toggle("No Clip", "Walk through walls", false, function(state)
+    Misc.SetNoClip(state)
+end)
+PlayerTab:Toggle("Anti-Aim", "Desync your hitbox", false, function(state)
+    Misc.SetAntiAim(state)
+end)
+
+print("✅ EnergyAssault Cheat loaded successfully!")
+Flux:Notification("EnergyAssault Cheat loaded!", "Press RightShift to open menu")
